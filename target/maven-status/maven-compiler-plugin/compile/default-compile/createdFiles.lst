@@ -1,0 +1,13 @@
+Controllers/UsuarioController.class
+Models/Usuario.class
+Models/Album.class
+servlets/Login.class
+DAO/UsuarioDAO.class
+Models/Musica.class
+DBManager/DBManager.class
+DAO/AlbumDAO.class
+DAO/MusicaDao.class
+servlets/cadastrarUsuario.class
+Controllers/AlbumController.class
+servlets/Upload.class
+Controllers/MusicaController.class

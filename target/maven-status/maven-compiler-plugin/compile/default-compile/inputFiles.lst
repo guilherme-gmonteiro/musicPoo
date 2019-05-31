@@ -1,0 +1,13 @@
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/servlets/cadastrarUsuario.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/servlets/Login.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/DAO/AlbumDAO.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/Controllers/AlbumController.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/DAO/UsuarioDAO.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/DAO/MusicaDao.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/DBManager/DBManager.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/servlets/Upload.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/Models/Album.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/Controllers/UsuarioController.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/Controllers/MusicaController.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/Models/Musica.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/Models/Usuario.java
