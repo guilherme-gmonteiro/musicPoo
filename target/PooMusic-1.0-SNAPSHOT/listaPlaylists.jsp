@@ -29,7 +29,14 @@
                             <tr>
                                 <th scope="row"><c:out value="${playlist.getId()}"/></th>
                                 <td><c:out value="${playlist.getNome()}"/></td>
-                                <td><button type="button" class="btn btn-primary">Ouvir</button></td>
+
+                                <td>
+                                    <form action="Playlist" method="POST">
+                                        <input type="hidden" name="id" value="<c:out value="${playlist.getId()}"/>">
+                                        <input type="submit" class="btn btn-primary" value="Ouvir">
+                                    </form>
+
+                                </td>
                             </tr>
                         </c:forEach>
 
