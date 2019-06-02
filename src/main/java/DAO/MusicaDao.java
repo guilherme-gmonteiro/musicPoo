@@ -24,7 +24,7 @@ public class MusicaDao {
         ArrayList<Musica> listaMusicas;
         listaMusicas = new ArrayList<Musica>();
         try {
-            
+
             Connection conexao = DBManager.DBManager.conectaDB();
             PreparedStatement comando = conexao.prepareStatement("SELECT m.id as musica_id, m.nome as musica_nome,"
                     + " duracao, caminho, id_album, a.id as album_id, a.nome as album,"
@@ -34,7 +34,7 @@ public class MusicaDao {
 
             while (rs.next()) {
                 Musica musica = new Musica(rs.getString("caminho"), rs.getString("musica_nome"),
-                rs.getString("duracao"), rs.getInt("id_album"));
+                        rs.getString("duracao"), rs.getInt("id_album"));
                 musica.setImagem(rs.getString("imagem"));
                 musica.setArtista(rs.getString("artista"));
                 listaMusicas.add(musica);
@@ -47,8 +47,36 @@ public class MusicaDao {
         return listaMusicas;
 
     }
-    
-        public static boolean salvar(Musica musica) {
+
+    public static ArrayList<Musica> musicasUsuario() {
+        ArrayList<Musica> listaMusicas;
+        listaMusicas = new ArrayList<Musica>();
+        try {
+
+            Connection conexao = DBManager.DBManager.conectaDB();
+            PreparedStatement comando = conexao.prepareStatement("SELECT m.id as musica_id, m.nome as musica_nome,"
+                    + " duracao, caminho, id_album, a.id as album_id, a.nome as album,"
+                    + " imagem, artista FROM musicas m INNER JOIN albums a ON(m.id_album = a.id)"
+                    + " ORDER BY data_upload DESC");
+            ResultSet rs = comando.executeQuery();
+
+            while (rs.next()) {
+                Musica musica = new Musica(rs.getString("caminho"), rs.getString("musica_nome"),
+                        rs.getString("duracao"), rs.getInt("id_album"));
+                musica.setImagem(rs.getString("imagem"));
+                musica.setArtista(rs.getString("artista"));
+                listaMusicas.add(musica);
+            }
+            return listaMusicas;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return listaMusicas;
+
+    }
+
+    public static boolean salvar(Musica musica) {
         try {
 
             Connection conexao = DBManager.DBManager.conectaDB();
@@ -57,7 +85,7 @@ public class MusicaDao {
             comando.setString(2, musica.getDuracao());
             comando.setString(3, musica.getCaminho());
             comando.setInt(4, musica.getIdAlbum());
-            
+
             int linhasAfetadas = comando.executeUpdate();
             return true;
         } catch (SQLException ex) {

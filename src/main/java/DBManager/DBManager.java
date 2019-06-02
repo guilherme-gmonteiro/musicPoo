@@ -21,13 +21,13 @@ public class DBManager {
     private static String BASEDADOS = "playerMusica";
     private static java.sql.Connection conexao;
     private static String bduser = "root";
-    private static String bdpass = "";
+    private static String bdpass = "1n0o9r7";
 
     public static java.sql.Connection conectaDB() {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            url = "jdbc:mysql://" + SERVIDOR + ":3307/" + BASEDADOS + "?useTimezone=true&serverTimezone=UTC";
+            url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS + "?useTimezone=true&serverTimezone=UTC";
             conexao = DriverManager.getConnection(url, bduser, bdpass);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);

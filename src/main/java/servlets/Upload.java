@@ -40,7 +40,7 @@ import org.apache.commons.io.output.*;
 @WebServlet(name = "Upload", urlPatterns = {"/Upload"})
 public class Upload extends HttpServlet {
 
-    private String filePath = "images/weekly/";
+    private String filePath = "upload/songs/";
     private int maxFileSize = 5000 * 1024;
     private int maxMemSize = 4 * 1024;
     private File file;

@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import Controllers.PlaylistController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -31,6 +32,10 @@ public class Playlist extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Models.Playlist playlist = PlaylistController.pegaporId(Integer.parseInt(request.getParameter("id")));
+        request.setAttribute("playlist", playlist);
+        request.setAttribute("musicas", playlist.getMusicas());
+        
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/playlist.jsp");
         dispatcher.forward(request, response);

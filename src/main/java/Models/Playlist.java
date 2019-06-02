@@ -13,7 +13,7 @@ import java.util.List;
  * @author guilherme
  */
 public class Playlist {
-   
+
     private int id;
     private String nome;
     private List<Musica> musicas = new ArrayList<>();
@@ -23,6 +23,10 @@ public class Playlist {
         this.nome = nome;
     }
 
+    public Playlist() {
+        
+    }
+
     public int getId() {
         return id;
     }
@@ -30,8 +34,6 @@ public class Playlist {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
 
     public String getNome() {
         return nome;
@@ -48,10 +50,9 @@ public class Playlist {
     public void setMusicas(List<Musica> musicas) {
         this.musicas = musicas;
     }
-    
-    public void addMusica(Musica musica){
+
+    public void addMusica(Musica musica) {
         this.musicas.add(musica);
     }
-    
-    
+
 }

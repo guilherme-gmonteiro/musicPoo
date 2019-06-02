@@ -20,6 +20,11 @@ public class MusicaController {
         return MusicaDao.ultimasAdicionadas();
     }
 
+    public static ArrayList<Musica> musicasUsuario() {
+
+        return MusicaDao.musicasUsuario();
+    }
+
     public static boolean salvar(Musica musica) {
 
         return MusicaDao.salvar(musica);

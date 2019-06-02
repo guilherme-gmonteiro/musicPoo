@@ -8,7 +8,7 @@
       <ul>
         <li><a href="Inicio">Inicio</a></li>
         <li><a href="listaPlaylists">Playlists</a></li>
-        <li><a href="#">Minhas Músicas</a></li>
+        <li><a href="listaMusicas">Minhas Músicas</a></li>
         <li><a href="#">Albums</a></li>
         
       </ul>
