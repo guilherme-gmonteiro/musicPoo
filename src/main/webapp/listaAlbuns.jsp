@@ -13,8 +13,10 @@
         <jsp:include page="parts/header.jsp"></jsp:include>
             <!-- content -->
             <div class="wrapper row2">
+                
                 <div id="container" class="clear">
                     <!-- content body -->
+                    <a class="btn btn-primary" href="criarAlbum" role="button">Criar Album</a>
                     <table class="table table-striped">
                         <thead>
                             <tr>
