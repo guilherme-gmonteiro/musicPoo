@@ -22,7 +22,7 @@
                         </div>
                    <div class="form-group">
                             <label for="exampleFormControlInput1">Artista</label>
-                            <input type="text" class="form-control" name="nome" id="exampleFormControlInput1" placeholder="Eddie Vedder">
+                            <input type="text" class="form-control" name="artista" id="exampleFormControlInput1" placeholder="Eddie Vedder">
                         </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Imagem do Album</label>
