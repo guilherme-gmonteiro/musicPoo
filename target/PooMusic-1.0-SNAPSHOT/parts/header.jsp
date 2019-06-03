@@ -8,9 +8,9 @@
       <ul>
         <li><a href="Inicio">Inicio</a></li>
         <li><a href="listaPlaylists">Playlists</a></li>
-        <li><a href="listaMusicas">Minhas Músicas</a></li>
+        <li><a href="listaMusicas">Músicas</a></li>
         <li><a href="listaAlbums">Albums</a></li>
-        
+        <li><a href="Login">Login</a></li>
       </ul>
     </nav>
   </header>
