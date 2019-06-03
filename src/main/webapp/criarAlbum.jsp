@@ -19,6 +19,7 @@
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Nome do Album</label>
                             <input type="text" class="form-control" name="nome" id="exampleFormControlInput1" placeholder="Into the Wild">
+                            
                         </div>
                    <div class="form-group">
                             <label for="exampleFormControlInput1">Artista</label>

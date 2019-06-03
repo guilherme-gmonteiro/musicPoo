@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import Controllers.MusicaController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -24,6 +25,8 @@ public class Inicio extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        request.setAttribute("musicas", MusicaController.ultimasAdicionadas());
                         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/Inicio.jsp");
         dispatcher.forward(request, response);

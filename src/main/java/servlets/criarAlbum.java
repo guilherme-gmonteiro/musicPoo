@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import Controllers.AlbumController;
 import Controllers.MusicaController;
 import Models.Album;
 import Models.Musica;
@@ -31,12 +32,12 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  */
 @WebServlet(name = "criarAlbum", urlPatterns = {"/criarAlbum"})
 public class criarAlbum extends HttpServlet {
-    
-    private String filePath = "/home/guilherme/NetBeansProjects/PooMusic/src/main/webapp/upload/images/";
+
+    private String filePath = "upload/images/";
     private int maxFileSize = 5000 * 1024;
     private int maxMemSize = 4 * 1024;
     private File file;
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -50,9 +51,9 @@ public class criarAlbum extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         if (ServletFileUpload.isMultipartContent(request)) {
-                        try {
+            try {
                 DiskFileItemFactory factory = new DiskFileItemFactory();
                 factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
 
@@ -67,18 +68,23 @@ public class criarAlbum extends HttpServlet {
                 }
 
                 List<FileItem> formItems = upload.parseRequest(request);
-                
-                System.out.println(formItems.get(1).getFieldName());
+                String nome = formItems.get(0).getString();
+                String artista = formItems.get(1).getString();
+
                 if (formItems != null && formItems.size() > 0) {
                     for (FileItem item : formItems) {
                         if (!item.isFormField()) {
                             String fileName = new File(item.getName()).getName();
                             String filePath = uploadPath + File.separator + fileName;
                             File storeFile = new File(filePath);
+ 
                             item.write(storeFile);
-                            
-                        }
-                        
+
+                            Album album = new Album(nome,
+                                    fileName, artista);
+                            AlbumController.salvar(album);
+                        } 
+
                     }
                 }
             } catch (FileUploadException ex) {
@@ -87,7 +93,7 @@ public class criarAlbum extends HttpServlet {
                 Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        //  Album album = new Album(request.getParameter("nome"),request.getParameter("imagem"), request.getParameter("Artista"));
+        //  
 
     }
 

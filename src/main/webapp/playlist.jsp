@@ -42,7 +42,7 @@
                         <ul id="plList">
                             <c:forEach var="musica" items="${requestScope.musicas}">
                             <li>
-                                <div class="pltest"><img src="https://images-na.ssl-images-amazon.com/images/I/81YYnSOZSEL._SY355_.jpg" width="100" height="100"></div>
+                                <div class="pltest"><img src="https://images-na.ssl-images-amazon.com/images/I/81YYnSOZSEL._SY355_.jpg" width="80" height="80"></div>
                                 <div class="plItem">
                                     <div class="plNum">01.</div>
                                     

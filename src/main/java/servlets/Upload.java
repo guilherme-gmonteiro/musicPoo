@@ -41,7 +41,7 @@ import org.apache.commons.io.output.*;
 public class Upload extends HttpServlet {
 
     private String filePath = "upload/songs/";
-    private int maxFileSize = 5000 * 1024;
+    private int maxFileSize = 500000 * 1024;
     private int maxMemSize = 4 * 1024;
     private File file;
 
@@ -79,11 +79,10 @@ public class Upload extends HttpServlet {
                 }
 
                 List<FileItem> formItems = upload.parseRequest(request);
-                String nome = formItems.get(1).getString();
-                String album = formItems.get(2).getString();
+                String nome = formItems.get(0).getString();
+                String album = formItems.get(1).getString();
                 String duracao = formItems.get(3).getString();
                 
-                System.out.println(formItems.get(2).getFieldName());
                 if (formItems != null && formItems.size() > 0) {
                     for (FileItem item : formItems) {
                         if (!item.isFormField()) {
@@ -92,7 +91,7 @@ public class Upload extends HttpServlet {
                             File storeFile = new File(filePath);
                             item.write(storeFile);
                             
-                            Musica musica = new Musica(filePath, nome, duracao,
+                            Musica musica = new Musica(fileName, nome, duracao,
                                      Integer.parseInt(album));
                             MusicaController.salvar(musica);
                         }

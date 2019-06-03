@@ -19,5 +19,10 @@ public class AlbumController {
         
         return AlbumDAO.listaAlbumsPorUsuario(id);
     }
+    
+    public static boolean salvar(Album album){
+    
+        return AlbumDAO.salvar(album);
+    }
 
 }

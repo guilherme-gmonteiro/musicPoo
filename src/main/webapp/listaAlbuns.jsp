@@ -29,7 +29,9 @@
                         <tbody>
                         <c:forEach var="album" items="${requestScope.albums}">
                             <tr>
-                                <th scope="row"><c:out value="${album.getIdAlbum()}"/></th>
+                                <th scope="row">
+                                    <img src="upload/images/<c:out value="${album.getImagem()}"/>" width="50" height="50">
+                                </th>
                                 <td><c:out value="${album.getNome()}"/></td>
 
                                 <td>
