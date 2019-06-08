@@ -15,14 +15,24 @@ import java.util.ArrayList;
  */
 public class AlbumController {
 
-    public static ArrayList<Album> listaAlbumsPorUsuario(int id){
-        
-        return AlbumDAO.listaAlbumsPorUsuario(id);
+    public static ArrayList<Album> listaAlbums() {
+
+        return AlbumDAO.listaAlbums();
     }
-    
-    public static boolean salvar(Album album){
-    
+
+    public static boolean salvar(Album album) {
+
         return AlbumDAO.salvar(album);
+    }
+
+    public static Album pegaAlbumporId(int id) {
+
+        return AlbumDAO.pegaAlbumporId(id);
+    }
+
+    public static boolean atualizar(Album album) {
+
+        return AlbumDAO.atualizar(album);
     }
 
 }

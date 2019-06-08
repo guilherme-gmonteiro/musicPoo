@@ -37,6 +37,7 @@ public class MusicaDao {
                         rs.getString("duracao"), rs.getInt("id_album"));
                 musica.setImagem(rs.getString("imagem"));
                 musica.setArtista(rs.getString("artista"));
+                musica.setId(rs.getInt("musica_id"));
                 listaMusicas.add(musica);
             }
             return listaMusicas;
@@ -65,6 +66,7 @@ public class MusicaDao {
                         rs.getString("duracao"), rs.getInt("id_album"));
                 musica.setImagem(rs.getString("imagem"));
                 musica.setArtista(rs.getString("artista"));
+                musica.setId(rs.getInt("musica_id"));
                 listaMusicas.add(musica);
             }
             return listaMusicas;
@@ -73,6 +75,35 @@ public class MusicaDao {
 
         }
         return listaMusicas;
+
+    }
+
+    public static Musica musicaPorId(int id) {
+        
+        try {
+
+            Connection conexao = DBManager.DBManager.conectaDB();
+            PreparedStatement comando = conexao.prepareStatement("SELECT m.id as musica_id, m.nome as musica_nome,"
+                    + " duracao, caminho, id_album, a.id as album_id, a.nome as album,"
+                    + " imagem, artista FROM musicas m INNER JOIN albums a ON(m.id_album = a.id)"
+                    + " WHERE m.id = ? ORDER BY data_upload DESC");
+            comando.setInt(1, id);
+            ResultSet rs = comando.executeQuery();
+
+            while (rs.next()) {
+                Musica musica = new Musica(rs.getString("caminho"), rs.getString("musica_nome"),
+                        rs.getString("duracao"), rs.getInt("id_album"));
+                musica.setImagem(rs.getString("imagem"));
+                musica.setArtista(rs.getString("artista"));
+                musica.setId(rs.getInt("musica_id"));
+                return musica;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return null;
 
     }
 

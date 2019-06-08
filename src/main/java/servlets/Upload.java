@@ -50,7 +50,7 @@ public class Upload extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
         Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
-        ArrayList<Album> listaAlbums =  AlbumController.listaAlbumsPorUsuario(usuario.getId());
+        ArrayList<Album> listaAlbums =  AlbumController.listaAlbums();
         request.setAttribute("listaAlbums", listaAlbums);
         
         RequestDispatcher dispatcher
@@ -94,6 +94,7 @@ public class Upload extends HttpServlet {
                             Musica musica = new Musica(fileName, nome, duracao,
                                      Integer.parseInt(album));
                             MusicaController.salvar(musica);
+                            response.sendRedirect(request.getContextPath() + "/listaMusicas");
                         }
                         
                     }

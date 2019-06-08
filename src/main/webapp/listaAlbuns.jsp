@@ -13,20 +13,22 @@
         <jsp:include page="parts/header.jsp"></jsp:include>
             <!-- content -->
             <div class="wrapper row2">
-                
+
                 <div id="container" class="clear">
                     <!-- content body -->
+                <c:if test="${sessionScope.usuarioLogado.getNome() != null}">
                     <a class="btn btn-primary" href="criarAlbum" role="button">Criar Album</a>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Ações</th>
+                </c:if>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Ações</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <c:forEach var="album" items="${requestScope.albums}">
                             <tr>
                                 <th scope="row">
@@ -35,10 +37,9 @@
                                 <td><c:out value="${album.getNome()}"/></td>
 
                                 <td>
-                                    <form action="Playlist" method="POST">
-                                        <input type="hidden" name="id" value="<c:out value="${album.getIdAlbum()}"/>">
-                                        <input type="submit" class="btn btn-primary" value="Ouvir">
-                                    </form>
+                                    <a href="#" class="btn btn-success" role="button" >Ouvir</a>
+                                     <a href="editarAlbum?id=${album.getIdAlbum()}" class="btn btn-primary" role="button" >Editar</a>
+                                      <a href="#" class="btn btn-danger" role="button" >Excluir</a>
 
                                 </td>
                             </tr>

@@ -21,14 +21,13 @@ import java.util.logging.Logger;
  */
 public class AlbumDAO {
 
-    public static ArrayList<Album> listaAlbumsPorUsuario(int idusuario) {
+    public static ArrayList<Album> listaAlbums() {
         ArrayList<Album> listaAlbums;
         listaAlbums = new ArrayList<Album>();
         try {
 
             Connection conexao = DBManager.DBManager.conectaDB();
-            PreparedStatement comando = conexao.prepareStatement("SELECT * FROM albums WHERE id_usuario = ?");
-            comando.setInt(1, idusuario);
+            PreparedStatement comando = conexao.prepareStatement("SELECT * FROM albums");
             ResultSet rs = comando.executeQuery();
 
             while (rs.next()) {
@@ -45,6 +44,28 @@ public class AlbumDAO {
 
     }
 
+    public static Album pegaAlbumporId(int id) {
+        try {
+
+            Connection conexao = DBManager.DBManager.conectaDB();
+            PreparedStatement comando = conexao.prepareStatement("SELECT * FROM albums WHERE id = ?");
+            comando.setInt(1, id);
+            ResultSet rs = comando.executeQuery();
+
+            while (rs.next()) {
+                Album album = new Album(rs.getString("nome"), rs.getString("imagem"), rs.getString("artista"));
+                album.setIdAlbum(rs.getInt("id"));
+                return album;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return null;
+
+    }
+
     public static boolean salvar(Album album) {
         try {
 
@@ -54,6 +75,24 @@ public class AlbumDAO {
             comando.setString(2, album.getImagem());
             comando.setString(3, album.getArtista());
 
+            int linhasAfetadas = comando.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public static boolean atualizar(Album album) {
+        try {
+
+            Connection conexao = DBManager.DBManager.conectaDB();
+            PreparedStatement comando = conexao.prepareStatement("UPDATE albums SET nome = ?, imagem = ?, artista = ? WHERE id = ?");
+            comando.setString(1, album.getNome());
+            comando.setString(2, album.getImagem());
+            comando.setString(3, album.getArtista());
+            comando.setInt(4, album.getIdAlbum());
+            
             int linhasAfetadas = comando.executeUpdate();
             return true;
         } catch (SQLException ex) {

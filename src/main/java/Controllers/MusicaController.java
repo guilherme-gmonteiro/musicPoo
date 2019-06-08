@@ -25,6 +25,11 @@ public class MusicaController {
         return MusicaDao.musicasUsuario();
     }
 
+    public static Musica musicaPorId(int id) {
+
+        return MusicaDao.musicaPorId(id);
+    }
+
     public static boolean salvar(Musica musica) {
 
         return MusicaDao.salvar(musica);

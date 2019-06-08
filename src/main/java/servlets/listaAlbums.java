@@ -29,10 +29,10 @@ public class listaAlbums extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                HttpSession sessao = request.getSession();
-        Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
-        ArrayList<Album> albums = AlbumController.listaAlbumsPorUsuario(usuario.getId());
+        
+        ArrayList<Album> albums = AlbumController.listaAlbums();
         request.setAttribute("albums", albums);
+        
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/listaAlbuns.jsp");
         dispatcher.forward(request, response);

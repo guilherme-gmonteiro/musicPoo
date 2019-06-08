@@ -83,6 +83,7 @@ public class criarAlbum extends HttpServlet {
                             Album album = new Album(nome,
                                     fileName, artista);
                             AlbumController.salvar(album);
+                            response.sendRedirect(request.getContextPath() + "/listaAlbums");
                         } 
 
                     }

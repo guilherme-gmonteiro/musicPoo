@@ -15,29 +15,38 @@
             <div class="wrapper row2">
                 <div id="container" class="clear">
                     <!-- content body -->
+                <c:if test="${sessionScope.usuarioLogado.getNome() != null}">
                     <a class="btn btn-primary" href="Upload" role="button">Upload de musica</a>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Ações</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
+                </c:if>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Ouvir</th>
+                            <th scope="col">Açoes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <c:forEach var="musica" items="${requestScope.musicas}">
                             <tr>
-                                <th scope="row"><c:out value="${musica.getId()}"/></th>
+                                <td scope="row">
+                                    <img src="<c:out value="upload/images/${musica.getImagem()}"/>" width="50" height="50">
+                                </td>
                                 <td><c:out value="${musica.getNome()}"/></td>
 
                                 <td>
-                                    <form action="Playlist" method="POST">
-                                        <input type="hidden" name="id" value="<c:out value="${playlist.getId()}"/>">
-                                        <input type="submit" class="btn btn-primary" value="Ouvir">
-                                    </form>
+                                    <audio controls>
+                                        <source src="upload/songs/${musica.getCaminho()}" type="audio/mpeg">
+                                        Seu Browser nao suporta audio
+                                    </audio>
 
                                 </td>
+                                <td>
+                                    <a href="editarMusica?id=${musica.getId()}" class="btn btn-primary" role="button" >Editar</a>
+                                    <a href="#" class="btn btn-danger" role="button" >Excluir</a>
+                                </td>
+
                             </tr>
                         </c:forEach>
 

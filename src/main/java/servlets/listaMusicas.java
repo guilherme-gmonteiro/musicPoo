@@ -24,25 +24,22 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "listaMusicas", urlPatterns = {"/listaMusicas"})
 public class listaMusicas extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-                ArrayList<Musica> musicas = MusicaController.musicasUsuario();
-        System.out.println(musicas);
+
+        ArrayList<Musica> musicas = MusicaController.musicasUsuario();
         request.setAttribute("musicas", musicas);
-                        RequestDispatcher dispatcher
+        RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/listaMusicas.jsp");
         dispatcher.forward(request, response);
-        
-    }
 
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
 }
