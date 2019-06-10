@@ -74,4 +74,19 @@ public class PlaylistDAO {
 
     }
 
+    public static boolean salvar(Playlist playlist) {
+        try {
+
+            Connection conexao = DBManager.DBManager.conectaDB();
+            PreparedStatement comando = conexao.prepareStatement("INSERT INTO playlists (nome) VALUES(?)");
+            comando.setString(1, playlist.getNome());
+
+            int linhasAfetadas = comando.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
 }

@@ -36,8 +36,9 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Duraçao</label>
                         <input type="text" name="duracao" class="form-control" id="exampleFormControlInput1" value="${requestScope.musica.getDuracao()}">
+                        <input type="hidden" name="idmusica" class="form-control" id="exampleFormControlInput1" value="${requestScope.musica.getId()}">
                     </div>
-                    <button class="btn btn-primary" type="submit">Fazer Upload</button>
+                    <button class="btn btn-primary" type="submit">Atualizar Música</button>
                 </form>
             </div>
         </div>

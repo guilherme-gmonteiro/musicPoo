@@ -15,16 +15,19 @@
             <div class="wrapper row2">
                 <div id="container" class="clear">
                     <!-- content body -->
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Ações</th>
+                <c:if test="${sessionScope.usuarioLogado.getNome() != null}">
+                    <a class="btn btn-primary" href="criarPlaylist" role="button">Criar Playlist</a>
+                </c:if>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Ações</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <c:forEach var="playlist" items="${requestScope.playlists}">
                             <tr>
                                 <th scope="row"><c:out value="${playlist.getId()}"/></th>

@@ -25,6 +25,11 @@ public class AlbumController {
         return AlbumDAO.salvar(album);
     }
 
+    public static boolean excluir(int id) {
+
+        return AlbumDAO.excluir(id);
+    }
+
     public static Album pegaAlbumporId(int id) {
 
         return AlbumDAO.pegaAlbumporId(id);

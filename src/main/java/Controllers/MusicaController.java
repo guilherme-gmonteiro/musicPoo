@@ -29,10 +29,20 @@ public class MusicaController {
 
         return MusicaDao.musicaPorId(id);
     }
+    
+        public static boolean excluir(int id) {
+
+        return MusicaDao.excluir(id);
+    }
 
     public static boolean salvar(Musica musica) {
 
         return MusicaDao.salvar(musica);
+    }
+
+    public static boolean atualizar(Musica musica) {
+
+        return MusicaDao.atualizar(musica);
     }
 
 }

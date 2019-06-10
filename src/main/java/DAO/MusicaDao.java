@@ -29,7 +29,7 @@ public class MusicaDao {
             PreparedStatement comando = conexao.prepareStatement("SELECT m.id as musica_id, m.nome as musica_nome,"
                     + " duracao, caminho, id_album, a.id as album_id, a.nome as album,"
                     + " imagem, artista FROM musicas m INNER JOIN albums a ON(m.id_album = a.id)"
-                    + " ORDER BY data_upload DESC LIMIT 10");
+                    + " WHERE m.deleted != 1 ORDER BY data_upload DESC LIMIT 10");
             ResultSet rs = comando.executeQuery();
 
             while (rs.next()) {
@@ -57,8 +57,8 @@ public class MusicaDao {
             Connection conexao = DBManager.DBManager.conectaDB();
             PreparedStatement comando = conexao.prepareStatement("SELECT m.id as musica_id, m.nome as musica_nome,"
                     + " duracao, caminho, id_album, a.id as album_id, a.nome as album,"
-                    + " imagem, artista FROM musicas m INNER JOIN albums a ON(m.id_album = a.id)"
-                    + " ORDER BY data_upload DESC");
+                    + " imagem, artista, m.id_usuario FROM musicas m INNER JOIN albums a ON(m.id_album = a.id)"
+                    + " WHERE m.deleted != 1 ORDER BY data_upload DESC");
             ResultSet rs = comando.executeQuery();
 
             while (rs.next()) {
@@ -67,6 +67,7 @@ public class MusicaDao {
                 musica.setImagem(rs.getString("imagem"));
                 musica.setArtista(rs.getString("artista"));
                 musica.setId(rs.getInt("musica_id"));
+                musica.setId_usuario(rs.getInt("id_usuario"));
                 listaMusicas.add(musica);
             }
             return listaMusicas;
@@ -79,14 +80,14 @@ public class MusicaDao {
     }
 
     public static Musica musicaPorId(int id) {
-        
+
         try {
 
             Connection conexao = DBManager.DBManager.conectaDB();
             PreparedStatement comando = conexao.prepareStatement("SELECT m.id as musica_id, m.nome as musica_nome,"
                     + " duracao, caminho, id_album, a.id as album_id, a.nome as album,"
                     + " imagem, artista FROM musicas m INNER JOIN albums a ON(m.id_album = a.id)"
-                    + " WHERE m.id = ? ORDER BY data_upload DESC");
+                    + " WHERE m.id = ? AND deleted != 1 ORDER BY data_upload DESC");
             comando.setInt(1, id);
             ResultSet rs = comando.executeQuery();
 
@@ -98,7 +99,7 @@ public class MusicaDao {
                 musica.setId(rs.getInt("musica_id"));
                 return musica;
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -111,11 +112,12 @@ public class MusicaDao {
         try {
 
             Connection conexao = DBManager.DBManager.conectaDB();
-            PreparedStatement comando = conexao.prepareStatement("INSERT INTO musicas (nome, duracao, caminho, id_album) VALUES(?, ?, ?, ?)");
+            PreparedStatement comando = conexao.prepareStatement("INSERT INTO musicas (nome, duracao, caminho, id_album, id_usuario, deleted) VALUES(?, ?, ?, ?, ?, 0)");
             comando.setString(1, musica.getNome());
             comando.setString(2, musica.getDuracao());
             comando.setString(3, musica.getCaminho());
             comando.setInt(4, musica.getIdAlbum());
+            comando.setInt(5, musica.getId_usuario());
 
             int linhasAfetadas = comando.executeUpdate();
             return true;
@@ -125,4 +127,40 @@ public class MusicaDao {
         }
     }
 
+    public static boolean atualizar(Musica musica) {
+        try {
+
+            Connection conexao = DBManager.DBManager.conectaDB();
+            PreparedStatement comando = conexao.prepareStatement("UPDATE musicas"
+                    + " SET nome = ?, duracao = ?, caminho = ?,  id_album = ? WHERE id = ?");
+
+            comando.setString(1, musica.getNome());
+            comando.setString(2, musica.getDuracao());
+            comando.setString(3, musica.getCaminho());
+            comando.setInt(4, musica.getIdAlbum());
+            comando.setInt(5, musica.getId());
+
+            int linhasAfetadas = comando.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public static boolean excluir(int id) {
+        try {
+
+            Connection conexao = DBManager.DBManager.conectaDB();
+            PreparedStatement comando = conexao.prepareStatement("UPDATE musicas SET deleted = 1 WHERE id = ?");
+            
+            comando.setInt(1, id);
+
+            int linhasAfetadas = comando.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
 }

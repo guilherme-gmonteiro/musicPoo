@@ -4,6 +4,7 @@
 /home/guilherme/NetBeansProjects/PooMusic/src/main/java/servlets/Login.java
 /home/guilherme/NetBeansProjects/PooMusic/src/main/java/DAO/AlbumDAO.java
 /home/guilherme/NetBeansProjects/PooMusic/src/main/java/DAO/PlaylistDAO.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/servlets/editarMusica.java
 /home/guilherme/NetBeansProjects/PooMusic/src/main/java/servlets/listaMusicas.java
 /home/guilherme/NetBeansProjects/PooMusic/src/main/java/Controllers/AlbumController.java
 /home/guilherme/NetBeansProjects/PooMusic/src/main/java/servlets/listaAlbums.java
@@ -12,6 +13,7 @@
 /home/guilherme/NetBeansProjects/PooMusic/src/main/java/DBManager/DBManager.java
 /home/guilherme/NetBeansProjects/PooMusic/src/main/java/servlets/criarAlbum.java
 /home/guilherme/NetBeansProjects/PooMusic/src/main/java/servlets/Playlist.java
+/home/guilherme/NetBeansProjects/PooMusic/src/main/java/servlets/editarAlbum.java
 /home/guilherme/NetBeansProjects/PooMusic/src/main/java/servlets/Upload.java
 /home/guilherme/NetBeansProjects/PooMusic/src/main/java/Models/Album.java
 /home/guilherme/NetBeansProjects/PooMusic/src/main/java/Models/Playlist.java

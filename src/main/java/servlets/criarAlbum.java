@@ -9,6 +9,7 @@ import Controllers.AlbumController;
 import Controllers.MusicaController;
 import Models.Album;
 import Models.Musica;
+import Models.Usuario;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -77,14 +79,17 @@ public class criarAlbum extends HttpServlet {
                             String fileName = new File(item.getName()).getName();
                             String filePath = uploadPath + File.separator + fileName;
                             File storeFile = new File(filePath);
- 
+
                             item.write(storeFile);
 
                             Album album = new Album(nome,
                                     fileName, artista);
+                            HttpSession sessao = request.getSession();
+                            Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+                            album.setId_usuario(usuario.getId());
                             AlbumController.salvar(album);
                             response.sendRedirect(request.getContextPath() + "/listaAlbums");
-                        } 
+                        }
 
                     }
                 }

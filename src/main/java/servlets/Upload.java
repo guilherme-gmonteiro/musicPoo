@@ -50,9 +50,9 @@ public class Upload extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
         Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
-        ArrayList<Album> listaAlbums =  AlbumController.listaAlbums();
+        ArrayList<Album> listaAlbums = AlbumController.listaAlbums();
         request.setAttribute("listaAlbums", listaAlbums);
-        
+
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/upload.jsp");
         dispatcher.forward(request, response);
@@ -61,7 +61,7 @@ public class Upload extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-  
+
         if (ServletFileUpload.isMultipartContent(request)) {
 
             try {
@@ -82,7 +82,7 @@ public class Upload extends HttpServlet {
                 String nome = formItems.get(0).getString();
                 String album = formItems.get(1).getString();
                 String duracao = formItems.get(3).getString();
-                
+
                 if (formItems != null && formItems.size() > 0) {
                     for (FileItem item : formItems) {
                         if (!item.isFormField()) {
@@ -90,13 +90,16 @@ public class Upload extends HttpServlet {
                             String filePath = uploadPath + File.separator + fileName;
                             File storeFile = new File(filePath);
                             item.write(storeFile);
-                            
+
                             Musica musica = new Musica(fileName, nome, duracao,
-                                     Integer.parseInt(album));
+                                    Integer.parseInt(album));
+                            HttpSession sessao = request.getSession();
+                            Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+                            musica.setId_usuario(usuario.getId());
                             MusicaController.salvar(musica);
                             response.sendRedirect(request.getContextPath() + "/listaMusicas");
                         }
-                        
+
                     }
                 }
             } catch (FileUploadException ex) {

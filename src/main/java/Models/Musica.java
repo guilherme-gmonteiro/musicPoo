@@ -15,7 +15,8 @@ public class Musica extends Album {
     private String caminho;
     private String nome;
     private String duracao;
-
+    private int id_usuario;
+    
     public Musica(String caminho, String nome, String duracao, int id_album) {
         super(id_album);
         this.caminho = caminho;
@@ -29,6 +30,16 @@ public class Musica extends Album {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public int getId_usuario() {
+        return id_usuario;
+    }
+    
+    @Override
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getCaminho() {

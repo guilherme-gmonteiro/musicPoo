@@ -27,12 +27,13 @@ public class AlbumDAO {
         try {
 
             Connection conexao = DBManager.DBManager.conectaDB();
-            PreparedStatement comando = conexao.prepareStatement("SELECT * FROM albums");
+            PreparedStatement comando = conexao.prepareStatement("SELECT * FROM albums WHERE deleted != 1");
             ResultSet rs = comando.executeQuery();
 
             while (rs.next()) {
                 Album album = new Album(rs.getString("nome"), rs.getString("imagem"), rs.getString("artista"));
                 album.setIdAlbum(rs.getInt("id"));
+                album.setId_usuario(rs.getInt("id_usuario"));
                 listaAlbums.add(album);
             }
             return listaAlbums;
@@ -48,7 +49,7 @@ public class AlbumDAO {
         try {
 
             Connection conexao = DBManager.DBManager.conectaDB();
-            PreparedStatement comando = conexao.prepareStatement("SELECT * FROM albums WHERE id = ?");
+            PreparedStatement comando = conexao.prepareStatement("SELECT * FROM albums WHERE id = ? WHERE deleted != 1");
             comando.setInt(1, id);
             ResultSet rs = comando.executeQuery();
 
@@ -70,11 +71,11 @@ public class AlbumDAO {
         try {
 
             Connection conexao = DBManager.DBManager.conectaDB();
-            PreparedStatement comando = conexao.prepareStatement("INSERT INTO albums (nome, imagem, artista) VALUES(?, ?, ?)");
+            PreparedStatement comando = conexao.prepareStatement("INSERT INTO albums (nome, imagem, artista, id_usuario, deleted) VALUES(?, ?, ?, ?, 0)");
             comando.setString(1, album.getNome());
             comando.setString(2, album.getImagem());
             comando.setString(3, album.getArtista());
-
+            comando.setInt(4, album.getId_usuario());
             int linhasAfetadas = comando.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -92,7 +93,23 @@ public class AlbumDAO {
             comando.setString(2, album.getImagem());
             comando.setString(3, album.getArtista());
             comando.setInt(4, album.getIdAlbum());
+
+            int linhasAfetadas = comando.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public static boolean excluir(int id) {
+        try {
+
+            Connection conexao = DBManager.DBManager.conectaDB();
+            PreparedStatement comando = conexao.prepareStatement("UPDATE albums SET deleted = 1 WHERE id = ?");
             
+            comando.setInt(1, id);
+
             int linhasAfetadas = comando.executeUpdate();
             return true;
         } catch (SQLException ex) {

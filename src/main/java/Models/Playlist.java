@@ -24,7 +24,11 @@ public class Playlist {
     }
 
     public Playlist() {
-        
+
+    }
+
+    public Playlist(String nome) {
+        this.nome = nome;
     }
 
     public int getId() {

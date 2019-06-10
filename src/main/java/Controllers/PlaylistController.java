@@ -19,11 +19,17 @@ public class PlaylistController {
 
         return PlaylistDAO.listaPlaylists();
     }
-    
-    public static Playlist pegaporId(int id){
-        
+
+    public static Playlist pegaporId(int id) {
+
         return PlaylistDAO.pegaporId(id);
-    
+
+    }
+
+    public static boolean salvar(Playlist playlist) {
+
+        return PlaylistDAO.salvar(playlist);
+
     }
 
 }

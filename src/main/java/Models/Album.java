@@ -15,6 +15,7 @@ public class Album {
     private String nome;
     private String imagem;
     private String artista;
+    private int id_usuario;
 
     public Album(String nome, String imagem, String artista) {
         this.nome = nome;
@@ -27,6 +28,23 @@ public class Album {
         
     }
 
+    public int getId_album() {
+        return id_album;
+    }
+
+    public void setId_album(int id_album) {
+        this.id_album = id_album;
+    }
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+    
+    
     public int getIdAlbum() {
         return id_album;
     }

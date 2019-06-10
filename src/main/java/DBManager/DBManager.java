@@ -20,7 +20,7 @@ public class DBManager {
     private static String SERVIDOR = "localhost";
     private static String BASEDADOS = "playerMusica";
     private static java.sql.Connection conexao;
-    private static String bduser = "root";
+    private static String bduser = "guilherme";
     private static String bdpass = "1n0o9r7";
 
     public static java.sql.Connection conectaDB() {
