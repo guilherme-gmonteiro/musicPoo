@@ -21,15 +21,18 @@ import javax.servlet.http.HttpSession;
  *
  * @author guilherme
  */
-@WebServlet(name = "criarPlaylist", urlPatterns = {"/criarPlaylist"})
-public class criarPlaylist extends HttpServlet {
+@WebServlet(name = "adicionarMusica", urlPatterns = {"/adicionarMusica"})
+public class adicionarMusica extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        HttpSession sessao = request.getSession();
+        Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+        request.setAttribute("playlists", PlaylistController.listaPlaylistsPorUsuario(usuario.getId()));
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/criarPlaylist.jsp");
+                = request.getRequestDispatcher("/adicionarMusica.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -37,11 +40,8 @@ public class criarPlaylist extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        Models.Playlist playlist = new Models.Playlist(request.getParameter("nome"));
-        PlaylistController.salvar(playlist);
-
-        response.sendRedirect(request.getContextPath() + "/listaPlaylists");
+        PlaylistController.adicionarMusica(Integer.parseInt(request.getParameter("idmusica")), Integer.parseInt(request.getParameter("playlist")));
+        response.sendRedirect(request.getContextPath() + "/listaMusicas");
     }
 
 }

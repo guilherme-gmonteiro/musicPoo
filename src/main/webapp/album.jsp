@@ -21,7 +21,7 @@
         <div class="container">
             <div class="column center">
                 <br>
-                <h6>${requestScope.playlist.getNome()}</h6>
+                <h6>${requestScope.album.getNome()}</h6>
             </div>
             <div class="column add-bottom">
                 <div id="mainwrap">

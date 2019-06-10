@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -107,7 +108,7 @@ public class AlbumDAO {
 
             Connection conexao = DBManager.DBManager.conectaDB();
             PreparedStatement comando = conexao.prepareStatement("UPDATE albums SET deleted = 1 WHERE id = ?");
-            
+
             comando.setInt(1, id);
 
             int linhasAfetadas = comando.executeUpdate();
@@ -118,4 +119,34 @@ public class AlbumDAO {
         }
     }
 
+    public static Album pegaListaMusicas(int id) {
+
+        List<Musica> musicas = new ArrayList<>();
+        Album album = new Album();
+        try {
+
+            Connection conexao = DBManager.DBManager.conectaDB();
+            PreparedStatement comando = conexao.prepareStatement("SELECT a.nome, m.id, m.nome"
+                    + " as musica_nome, m.duracao, m.caminho "
+                    + "FROM albums a INNER JOIN musicas m ON(a.id = m.id_album) WHERE a.id = ?");
+
+            comando.setInt(1, id);
+            ResultSet rs = comando.executeQuery();
+
+            album.setIdAlbum(id);
+            while (rs.next()) {
+                Musica musica = new Musica(rs.getString("caminho"), rs.getString("musica_nome"), rs.getString("duracao"), id);
+                musica.setImagem(rs.getString("imagem"));
+                musicas.add(musica);
+                album.setNome(rs.getString("nome"));
+
+            }
+            album.setMusicas(musicas);
+            return album;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return album;
+    }
 }

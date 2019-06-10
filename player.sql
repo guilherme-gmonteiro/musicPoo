@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.21, for Linux (x86_64)
 --
 -- Host: localhost    Database: playerMusica
 -- ------------------------------------------------------
--- Server version	5.7.26-0ubuntu0.16.04.1
+-- Server version	5.7.21-1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,10 +28,11 @@ CREATE TABLE `albums` (
   `imagem` varchar(255) NOT NULL,
   `artista` varchar(70) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
+  `deleted` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_usuario_idx` (`id_usuario`),
   CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +41,7 @@ CREATE TABLE `albums` (
 
 LOCK TABLES `albums` WRITE;
 /*!40000 ALTER TABLE `albums` DISABLE KEYS */;
-INSERT INTO `albums` VALUES (1,'Into The Wild','71B2GLF-7zL._SX355_.jpg','Eddie Vedder',1),(2,'The Bright lights EP','gary.jpg','Gary Clark JR',NULL),(3,'Led Zeppelin IV','Led_Zeppelin_-_Led_Zeppelin_IV.jpg','Led Zeppelin',NULL);
+INSERT INTO `albums` VALUES (1,'Into The Wild','71B2GLF-7zL._SX355_.jpg','Eddie Vedder',1,0),(2,'The Bright lights EP','gary.jpg','Gary Clark JR',NULL,0),(3,'Led Zeppelin IV','Led_Zeppelin_-_Led_Zeppelin_IV.jpg','Led Zeppelin',NULL,0),(4,'AlbumTeste','DeepinScreenshot_20190605145729.png','FrankFUrt',1,1);
 /*!40000 ALTER TABLE `albums` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,6 +59,8 @@ CREATE TABLE `musicas` (
   `caminho` varchar(255) NOT NULL,
   `id_album` int(11) NOT NULL,
   `data_upload` datetime DEFAULT CURRENT_TIMESTAMP,
+  `id_usuario` int(11) DEFAULT NULL,
+  `deleted` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_album_idx` (`id_album`),
   CONSTRAINT `id_album` FOREIGN KEY (`id_album`) REFERENCES `albums` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -70,7 +73,7 @@ CREATE TABLE `musicas` (
 
 LOCK TABLES `musicas` WRITE;
 /*!40000 ALTER TABLE `musicas` DISABLE KEYS */;
-INSERT INTO `musicas` VALUES (1,'Sething Fort','12','SettingForth.mp3',1,'2019-05-20 16:30:25'),(2,'Teste','12','SettingForth.mp3',1,'2019-05-22 11:52:47'),(3,'Teste de MUSICA','12','SettingForth.mp3',1,'2019-05-31 10:29:58'),(4,'Bright Lights','5:32','brightlights.mp3',1,'2019-06-08 12:28:59'),(5,'Things Are Changinâ?? (live solo acoustic)','5:23','Gary Clark Jr. - Things Are Changin captured in The Live Room.mp3',2,'2019-06-08 16:34:18');
+INSERT INTO `musicas` VALUES (1,'Sething Fort','12','SettingForth.mp3',1,'2019-05-20 16:30:25',1,0),(2,'Teste','12','SettingForth.mp3',1,'2019-05-22 11:52:47',1,1),(3,'Stairway to Heaven','7:00','StairwayToHeaven.mp3',3,'2019-05-31 10:29:58',1,0),(4,'Bright Lights','5:32','brightLightsMusic.mp3',2,'2019-06-08 12:28:59',1,0),(5,'Things Are Changinâ?? (live solo acoustic)','5:23','Gary Clark Jr. - Things Are Changin captured in The Live Room.mp3',2,'2019-06-08 16:34:18',1,0);
 /*!40000 ALTER TABLE `musicas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +93,7 @@ CREATE TABLE `playlist_musica` (
   KEY `fk_playlist_musica_2_idx` (`id_musica`),
   CONSTRAINT `fk_playlist_musica_1` FOREIGN KEY (`id_playlist`) REFERENCES `playlists` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_playlist_musica_2` FOREIGN KEY (`id_musica`) REFERENCES `musicas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +102,7 @@ CREATE TABLE `playlist_musica` (
 
 LOCK TABLES `playlist_musica` WRITE;
 /*!40000 ALTER TABLE `playlist_musica` DISABLE KEYS */;
-INSERT INTO `playlist_musica` VALUES (1,1,1),(2,2,1),(3,3,1);
+INSERT INTO `playlist_musica` VALUES (1,1,1),(2,2,1),(3,3,1),(4,5,3);
 /*!40000 ALTER TABLE `playlist_musica` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,8 +116,9 @@ DROP TABLE IF EXISTS `playlists`;
 CREATE TABLE `playlists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(70) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +127,7 @@ CREATE TABLE `playlists` (
 
 LOCK TABLES `playlists` WRITE;
 /*!40000 ALTER TABLE `playlists` DISABLE KEYS */;
-INSERT INTO `playlists` VALUES (1,'Playlist de Teste'),(2,'Playlist numero 2');
+INSERT INTO `playlists` VALUES (1,'Playlist de Teste',1),(2,'Playlist numero 2',1),(3,'teste',1);
 /*!40000 ALTER TABLE `playlists` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +144,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(100) NOT NULL,
   `senha` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +153,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Guilherme','guilherme.gomes.monteiro@hotmail.com','teste123');
+INSERT INTO `usuarios` VALUES (1,'Guilherme','guilherme.gomes.monteiro@hotmail.com','teste123'),(2,'Mauricio','mauricio@net.com','123123');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -162,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-08 17:29:43
+-- Dump completed on 2019-06-10 17:19:33

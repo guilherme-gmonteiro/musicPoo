@@ -26,7 +26,7 @@
             <div class="column add-bottom">
                 <div id="mainwrap">
                     <div id="nowPlay">
-                        <span class="left" id="npAction">Paused...</span>
+                        <span class="left" id="npAction">Pausado...</span>
                         <span class="right" id="npTitle"></span>
                     </div>
                     <div id="audiowrap">
@@ -42,7 +42,7 @@
                         <ul id="plList">
                             <c:forEach var="musica" items="${requestScope.musicas}">
                             <li>
-                                <div class="pltest"><img src="https://images-na.ssl-images-amazon.com/images/I/81YYnSOZSEL._SY355_.jpg" width="80" height="80"></div>
+                                <div class="pltest"><img src="upload/images/${musica.getImagem()}" width="80" height="80"></div>
                                 <div class="plItem">
                                     <div class="plNum">01.</div>
                                     

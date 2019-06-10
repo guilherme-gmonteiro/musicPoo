@@ -35,6 +35,10 @@ public class AlbumController {
         return AlbumDAO.pegaAlbumporId(id);
     }
 
+    public static Album pegaListaMusicas(int id) {
+        return AlbumDAO.pegaListaMusicas(id);
+    }
+
     public static boolean atualizar(Album album) {
 
         return AlbumDAO.atualizar(album);

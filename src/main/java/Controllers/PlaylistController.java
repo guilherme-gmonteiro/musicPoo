@@ -20,6 +20,11 @@ public class PlaylistController {
         return PlaylistDAO.listaPlaylists();
     }
 
+    public static ArrayList<Playlist> listaPlaylistsPorUsuario(int id) {
+
+        return PlaylistDAO.listaPlaylistsPorUsuario(id);
+    }
+
     public static Playlist pegaporId(int id) {
 
         return PlaylistDAO.pegaporId(id);
@@ -29,6 +34,12 @@ public class PlaylistController {
     public static boolean salvar(Playlist playlist) {
 
         return PlaylistDAO.salvar(playlist);
+
+    }
+
+    public static boolean adicionarMusica(int idmusica, int idplaylist) {
+
+        return PlaylistDAO.adicionarMusica(idmusica, idplaylist);
 
     }
 

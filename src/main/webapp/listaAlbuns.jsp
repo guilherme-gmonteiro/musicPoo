@@ -37,11 +37,14 @@
                                 <td><c:out value="${album.getNome()}"/></td>
 
                                 <td>
-                                    <a href="#" class="btn btn-success" role="button" >Ouvir</a>
-                                    <c:if test="${sessionScope.usuarioLogado.getId() == album.getId_usuario()}">
-                                     <a href="editarAlbum?id=${album.getIdAlbum()}" class="btn btn-primary" role="button" >Editar</a>
-                                      <a href="excluirAlbum?id=${album.getIdAlbum()}" class="btn btn-danger" role="button" >Excluir</a>
-                                    </c:if>
+                                    <form action="AlbumList" method="POST">
+                                        <input type="hidden" name="id" value="<c:out value="${album.getIdAlbum()}"/>">
+                                        <input type="submit" class="btn btn-primary" value="Ouvir">
+                                        <c:if test="${sessionScope.usuarioLogado.getId() == album.getId_usuario()}">
+                                            <a href="editarAlbum?id=${album.getIdAlbum()}" class="btn btn-primary" role="button" >Editar</a>
+                                            <a href="excluirAlbum?id=${album.getIdAlbum()}" class="btn btn-danger" role="button" >Excluir</a>
+                                        </c:if>
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>

@@ -137,10 +137,10 @@
     <body>
         <div class="login-page">
             <div class="form">
-                <form class="register-form">
-                    <input type="text" placeholder="name"/>
-                    <input type="password" placeholder="password"/>
-                    <input type="text" placeholder="email address"/>
+                <form method="post" action="cadastrarUsuario" class="register-form">
+                    <input type="text" name="email" placeholder="Email"/>
+                    <input type="password" name="senha" placeholder="senha"/>
+                    <input type="text" name="nome" placeholder="Nome"/>
                     <button>Criar</button>
                     <p class="message">Já tem cadastro? <a href="#">Logar</a></p>
                 </form>

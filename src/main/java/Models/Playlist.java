@@ -5,6 +5,7 @@
  */
 package Models;
 
+import Interfaces.ListaMusicas;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author guilherme
  */
-public class Playlist {
+public class Playlist implements ListaMusicas {
 
     private int id;
     private String nome;
@@ -47,14 +48,17 @@ public class Playlist {
         this.nome = nome;
     }
 
+    @Override
     public List<Musica> getMusicas() {
         return musicas;
     }
 
+    @Override
     public void setMusicas(List<Musica> musicas) {
         this.musicas = musicas;
     }
 
+    @Override
     public void addMusica(Musica musica) {
         this.musicas.add(musica);
     }

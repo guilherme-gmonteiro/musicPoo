@@ -45,6 +45,7 @@
                                 <td>
                                     <c:if test="${sessionScope.usuarioLogado.getId() == musica.getId_usuario()}">
                                     <a href="editarMusica?id=${musica.getId()}" class="btn btn-primary" role="button" >Editar</a>
+                                    <a href="adicionarMusica?id=${musica.getId()}" class="btn btn-primary" role="button" >Adicionar</a>
                                     <a href="excluirMusica?id=${musica.getId()}" class="btn btn-danger" role="button" >Excluir</a>
                                     </c:if>
                                 </td>

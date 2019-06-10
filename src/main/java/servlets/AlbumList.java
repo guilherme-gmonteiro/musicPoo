@@ -5,9 +5,12 @@
  */
 package servlets;
 
-import Controllers.UsuarioController;
-import Models.Usuario;
+import Controllers.AlbumController;
+import Controllers.PlaylistController;
+import Models.Album;
 import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,10 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author guilherme
+ * @author guilherme.gmonteiro3
  */
-@WebServlet(name = "cadastrarUsuario", urlPatterns = {"/cadastrarUsuario"})
-public class cadastrarUsuario extends HttpServlet {
+@WebServlet(name = "AlbumList", urlPatterns = {"/AlbumList"})
+public class AlbumList extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -31,10 +34,13 @@ public class cadastrarUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Usuario usuario = new Usuario(request.getParameter("nome"), request.getParameter("email"),
-                request.getParameter("senha"));
-        UsuarioController.cadastrar(usuario);
-        response.sendRedirect("Login");
+        Album album = AlbumController.pegaListaMusicas(Integer.parseInt(request.getParameter("id")));
+        request.setAttribute("album", album);
+        request.setAttribute("musicas", album.getMusicas());
+        
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("/album.jsp");
+        dispatcher.forward(request, response);
 
     }
 
