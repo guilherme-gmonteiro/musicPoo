@@ -127,8 +127,8 @@ public class AlbumDAO {
 
             Connection conexao = DBManager.DBManager.conectaDB();
             PreparedStatement comando = conexao.prepareStatement("SELECT a.nome, m.id, m.nome"
-                    + " as musica_nome, m.duracao, m.caminho "
-                    + "FROM albums a INNER JOIN musicas m ON(a.id = m.id_album) WHERE a.id = ?");
+                    + " as musica_nome, m.duracao, m.caminho, a.imagem"
+                    + " FROM albums a INNER JOIN musicas m ON(a.id = m.id_album) WHERE a.id = ?");
 
             comando.setInt(1, id);
             ResultSet rs = comando.executeQuery();
